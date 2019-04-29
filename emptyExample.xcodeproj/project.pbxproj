@@ -29,6 +29,9 @@
 		0E2BF3D5227799BB00B78C9A /* country.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = country.cpp; sourceTree = "<group>"; };
 		0E2BF3D6227799BB00B78C9A /* country.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = country.hpp; sourceTree = "<group>"; };
 		0E2BF3D82277A29D00B78C9A /* country_rot.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = country_rot.txt; sourceTree = "<group>"; };
+		0E2BF3D92277AE7A00B78C9A /* PROPOSAL.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = PROPOSAL.md; sourceTree = "<group>"; };
+		0E2BF3DA2277AE8600B78C9A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		0E2BF3DB2277AEA800B78C9A /* DEVELOPMENT.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = DEVELOPMENT.md; sourceTree = "<group>"; };
 		E42962AC2163EDD300A6A9E2 /* ofCamera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ofCamera.cpp; path = ../../../libs/openFrameworks/3d/ofCamera.cpp; sourceTree = SOURCE_ROOT; };
 		E42962AD2163EDD300A6A9E2 /* ofMesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ofMesh.h; path = ../../../libs/openFrameworks/3d/ofMesh.h; sourceTree = SOURCE_ROOT; };
 		E42962AE2163EDD300A6A9E2 /* ofNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ofNode.h; path = ../../../libs/openFrameworks/3d/ofNode.h; sourceTree = SOURCE_ROOT; };
@@ -542,6 +545,9 @@
 				0E2BF3D82277A29D00B78C9A /* country_rot.txt */,
 				0E2BF3D5227799BB00B78C9A /* country.cpp */,
 				0E2BF3D6227799BB00B78C9A /* country.hpp */,
+				0E2BF3D92277AE7A00B78C9A /* PROPOSAL.md */,
+				0E2BF3DA2277AE8600B78C9A /* README.md */,
+				0E2BF3DB2277AEA800B78C9A /* DEVELOPMENT.md */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
