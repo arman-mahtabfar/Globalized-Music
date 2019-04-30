@@ -44,8 +44,7 @@ void ofApp::setup(){
         }
     } else {
         std::cout << "You do not have the matching data files for countries.";
-        std::cout << countries.size() << endl;
-        std::cout << country_rot.size();
+        
 
     }
     
@@ -182,6 +181,11 @@ void ofApp::keyPressed(int key){
         sphere.tiltDeg(rand_country.tilt_x);
         sphere.rollDeg(rand_country.roll_z);
         
+        std::cout << rand_country.pan_y << endl;
+        std::cout << rand_country.tilt_x<< endl;
+        std::cout << rand_country.roll_z<< endl;
+
+
     }
     
     
