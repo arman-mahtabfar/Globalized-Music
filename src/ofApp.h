@@ -4,7 +4,7 @@
 #include "country.hpp"
 #include <vector>
 #include <random>
-#include <iostream>
+#include "iostream"
 #include <stdio.h>
 #include <sstream>
 #include <fstream>
@@ -32,6 +32,9 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
         Country getRandom_country(vector<Country> countries);
         vector<Country> get_country_names(string filePath);
+        int string_to_int(string line_of_txt);
+        vector<vector<int>> get_countryRot(string filePath);
+
     
     
     //Determines if we want to display keys for UI or not.
@@ -68,5 +71,11 @@ class ofApp : public ofBaseApp{
     string country_answer;
     
     vector<Country> countries;
+    
+    vector<vector<int>> country_rot;
+    
+    int total_pan;
+    int total_tilt;
+    int total_roll;
     
 };

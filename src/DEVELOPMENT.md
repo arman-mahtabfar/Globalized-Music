@@ -113,5 +113,8 @@
 * Next, I am creating a text file that will add the corresponding tilt pan and roll values to countries so that the globe will properly point to a specific region close to where the country is.
 * Before I create the new text file, I am going to focus on properly moving the git repository to my project. I talked to my moderator about this and he said that the error was odd, but the issue will be resolved if I simply remove the repository and md files to the proper project space. The project space on git does not properly read the data in the bin's data folder.
 
+* Later today, I used key commands and print statements to figure out the pan tilt and roll int values that offset from the origin. Now I am going to focus on mapping those values to the country objects.
+
+* Today I made a lot fo progress. I used the two text files to map the rotation to specific countries, by creating a vector of vector of ints for rotations ,and setting the rotations of each world as to the values of the vector inside the element of the first vector. Now, When I add more countries and rotation values, this will absolutely work. Tomorrow I am going to focus on testing.
 
 

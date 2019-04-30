@@ -14,7 +14,7 @@ using namespace std;
 
 struct Country {
     string name;
-    int tilt_x;
     int pan_y;
+    int tilt_x;
     int roll_z;
 };

@@ -5,6 +5,12 @@
 void ofApp::setup(){
     ofSetWindowTitle("MUSIC AROUND THE WORLD");
     
+    
+    //PURELY FOR FINDING TOTAL OFFEST ROTATION FROM ORIGIN
+    total_pan = 0;
+    total_roll = 0;
+    total_tilt = 0;
+    
     //set the background to black
     ofBackground(ofColor::black);
     
@@ -24,6 +30,26 @@ void ofApp::setup(){
     
     //Load the 2d image of the globe
     countries = get_country_names("/Users/arman.mahtabfar/Desktop/of_v0.10.1_osx_release/apps/myApps/emptyExample/src/countries_name.txt");
+    
+    country_rot = get_countryRot("/Users/arman.mahtabfar/Desktop/of_v0.10.1_osx_release/apps/myApps/emptyExample/src/country_rot.txt");
+    
+    
+    //match the countries to country rotation.
+    if (countries.size() == country_rot.size()) {
+        for (unsigned int i = 0; i < countries.size(); i++) {
+            countries.at(i).pan_y = country_rot.at(i).at(0);
+            countries.at(i).tilt_x = country_rot.at(i).at(1);
+            countries.at(i).roll_z = country_rot.at(i).at(2);
+
+        }
+    } else {
+        std::cout << "You do not have the matching data files for countries.";
+        std::cout << countries.size() << endl;
+        std::cout << country_rot.size();
+
+    }
+    
+    
     
 
     //laod the image of the stars for the background.
@@ -108,6 +134,9 @@ void ofApp::draw(){
         key_box_string << "(s): Play random anthem"<<endl;
         key_box_string << "(d): Display Country" << endl;
         key_box_string << "Current Country: " << country_answer <<endl;
+        key_box_string << "(r): Roll (Around blue axis)" << endl;
+        key_box_string << "(p): Pan (Around green axis)" << endl;
+        key_box_string << "(t): Tilt (Around red axis)" << endl;
         key_box_string << "(h): Toggle Key Display"<<endl;
         ofDrawBitmapStringHighlight(key_box_string.str().c_str(), 20, 20);
     }
@@ -149,10 +178,9 @@ void ofApp::keyPressed(int key){
         sphere.setOrientation(ofQuaternion(0, ofVec3f(0,0,0)));
         
         
-        int pan_int = -80;
-        sphere.panDeg(pan_int);
-        sphere.rollDeg(-40);
-        sphere.tiltDeg(10);
+        sphere.panDeg(rand_country.pan_y);
+        sphere.tiltDeg(rand_country.tilt_x);
+        sphere.rollDeg(rand_country.roll_z);
         
     }
     
@@ -174,7 +202,6 @@ void ofApp::keyPressed(int key){
     
     if (key == 'w') {
         //STOP SPINNING GLOBE
-        
         rotate = false;
     }
     
@@ -191,6 +218,44 @@ void ofApp::keyPressed(int key){
         keyBox = !keyBox;
     }
     
+    
+    //ROTATES AROUND GREEN AXIS
+    if (key == 'p') {
+        total_pan = total_pan + 5;
+        sphere.panDeg(5);
+    }
+    
+    //ROTATES AROUND BLUE AXIS
+    if (key == 'r') {
+        total_roll = total_roll + 5;
+        sphere.rollDeg(5);
+    }
+    
+    //ROTATES AROUND RED AXIS
+    if (key == 't') {
+        total_tilt = total_tilt + 5;
+        sphere.tiltDeg(5);
+
+    }
+    
+    //Print rotate values
+    if (key == 'b') {
+        total_tilt = total_tilt % 360;
+        total_pan = total_pan % 360;
+        total_roll = total_roll % 360;
+
+        std::cout << "PAN: " << total_pan << endl;
+        std::cout << "TILT: " << total_tilt << endl;
+        std::cout << "ROLL:" << total_roll << endl;
+    }
+    
+    //Reset Rotation Values. Purely for finding data for the country rotation text file.
+    if (key == 'l') {
+        sphere.setOrientation(ofQuaternion(0, ofVec3f(0,0,0)));
+        total_tilt = 0;
+        total_roll = 0;
+        total_pan = 0;
+    }
     
 }
 
@@ -263,7 +328,7 @@ vector<Country> ofApp::get_country_names(string filePath) {
     ifstream stream;
     stream.open(filePath);
     if (stream.fail()) {
-        cerr << "Error opening the desired puzzle file." << endl;
+        cerr << "Error opening the desired data file." << endl;
         terminate();
     }
     
@@ -278,4 +343,44 @@ vector<Country> ofApp::get_country_names(string filePath) {
         }
     }
     return countries_in_file;
+}
+
+//--------------------------------------------------------------
+int ofApp::string_to_int(string line_of_txt) {
+    int toReturn = stoi(line_of_txt);
+    return toReturn;
+}
+
+
+
+//--------------------------------------------------------------
+vector<vector<int>> ofApp::get_countryRot(string filePath) {
+    vector<vector<int>> toReturn;
+    ifstream stream;
+    
+    
+    stream.open(filePath);
+    if (stream.fail()) {
+        cerr << "Error opening the desired data file." << endl;
+        terminate();
+    }
+    
+    
+    string line_of_text;
+    
+    while (!stream.eof()) {
+        getline(stream, line_of_text);
+        vector<int> current_country_rot;
+        
+        vector<string> values_as_string = ofSplitString(line_of_text, ",");
+        for (unsigned int i = 0; i < values_as_string.size(); i++) {
+            int toAdd = string_to_int(values_as_string.at(i));
+            current_country_rot.push_back(toAdd);
+        }
+        
+        if (current_country_rot.size() == 3) {
+             toReturn.push_back(current_country_rot);
+        }
+    }
+    return toReturn;
 }
