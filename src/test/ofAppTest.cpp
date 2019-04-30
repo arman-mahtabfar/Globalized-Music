@@ -51,7 +51,7 @@ TEST_CASE("Get country names") {
     vector<Country> countries = app.get_country_names("/Users/arman.mahtabfar/Desktop/of_v0.10.1_osx_release/apps/myApps/emptyExample/src/countries_name.txt");
     
     REQUIRE(countries.at(0).name == "Usa");
-    REQUIRE(countries.at(countries.size() - 1).name == "Australia");
+    REQUIRE(countries.at(countries.size() - 1).name == "Egypt");
     REQUIRE(countries.at(4).name == "Nigeria");
     REQUIRE(countries.at(3).name == "Ghana");
     
@@ -77,9 +77,9 @@ TEST_CASE("Get country_rot") {
     int australia_tilt = country_rotations.at(country_rotations.size() - 1).at(1);
     int australia_roll = country_rotations.at(country_rotations.size() - 1).at(2);
     
-    REQUIRE(australia_pan == 40);
+    REQUIRE(australia_pan == 160);
     REQUIRE(australia_tilt == 325);
-    REQUIRE(australia_roll == 0);
+    REQUIRE(australia_roll == 350);
     
     
     int kenya_pan = country_rotations.at(5).at(0);
