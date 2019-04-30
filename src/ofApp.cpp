@@ -5,14 +5,13 @@
 void ofApp::setup(){
     ofSetWindowTitle("MUSIC AROUND THE WORLD");
     
+    //set the background to black
+    ofBackground(ofColor::black);
     
     //PURELY FOR FINDING TOTAL OFFEST ROTATION FROM ORIGIN
     total_pan = 0;
     total_roll = 0;
     total_tilt = 0;
-    
-    //set the background to black
-    ofBackground(ofColor::black);
     
     //enable the ability to draw the setbox.
     keyBox = true;
@@ -26,6 +25,7 @@ void ofApp::setup(){
     //display the axis of the sphere
     displayAxis = true;
     
+    //These will change everytime we generate a random country.
     country_answer = "None";
     current_country = "None";
     
@@ -55,13 +55,11 @@ void ofApp::setup(){
     //laod the image of the stars for the background.
     stars.load("stars.jpg");
     
-    
     //Set depth for gui
     ofDisableAlphaBlending();
     
     //This sets the 3d UI for the globe
     ofEnableDepthTest();
-    
     
     //upload the image to the sphere
     ofDisableArbTex();
@@ -88,10 +86,10 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
+    //if the rotate key indicates true, allow the sphere to spin.
     if (rotate) {
         sphere.rotateDeg(spinY, 0.0 , 1.0, 0.0);
     }
-    
     
     //This helps make the stars much easier to see.
     light1.setPosition((ofGetWidth()*.3)+ cos(ofGetElapsedTimef()*.3)*(ofGetWidth()*.3), ofGetHeight()/2, 350);
@@ -104,7 +102,7 @@ void ofApp::update(){
 void ofApp::draw(){
     
     
-    
+    //Everytime I call draw I must also draw the image of the stars. but I first must do this by disabling the depth.
     ofPushStyle();
     glDisable(GL_DEPTH_TEST);
     stars.draw(0,0);
@@ -131,8 +129,8 @@ void ofApp::draw(){
     if(keyBox) {
         stringstream key_box_string;
         key_box_string << "Keys: " << endl << endl;
-        key_box_string << "(w): Stop rotating" <<endl;
-        key_box_string << "(a): Reset" <<endl;
+        key_box_string << "(w): Toggle spin" <<endl;
+        key_box_string << "(a): Reset view" <<endl;
         key_box_string << "(s): Play random anthem"<<endl;
         key_box_string << "(d): Display Country" << endl;
         key_box_string << "(z): Toggle Axis Display" <<endl;
@@ -185,11 +183,6 @@ void ofApp::keyPressed(int key){
         sphere.tiltDeg(rand_country.tilt_x);
         sphere.rollDeg(rand_country.roll_z);
         
-        std::cout << rand_country.pan_y << endl;
-        std::cout << rand_country.tilt_x<< endl;
-        std::cout << rand_country.roll_z<< endl;
-
-
     }
     
     
@@ -209,8 +202,8 @@ void ofApp::keyPressed(int key){
     
     
     if (key == 'w') {
-        //STOP SPINNING GLOBE
-        rotate = false;
+        //Toggle SPINNING GLOBE
+        rotate = !rotate;
     }
     
     
@@ -294,6 +287,8 @@ void ofApp::mousePressed(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
     //sphere.setOrientation(ofQuaternion(0, ofVec3f(0,0,0)));
+    
+    //this will set the camera to its orignal spot, fixing the issue of location spot
     cam.reset();
     
 }
