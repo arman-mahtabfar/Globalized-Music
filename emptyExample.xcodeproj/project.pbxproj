@@ -237,6 +237,16 @@
 			path = test;
 			sourceTree = "<group>";
 		};
+		0E2BF3F22278DC9200B78C9A /* mdFiles */ = {
+			isa = PBXGroup;
+			children = (
+				0E2BF3D92277AE7A00B78C9A /* PROPOSAL.md */,
+				0E2BF3DB2277AEA800B78C9A /* DEVELOPMENT.md */,
+				0E2BF3DA2277AE8600B78C9A /* README.md */,
+			);
+			path = mdFiles;
+			sourceTree = "<group>";
+		};
 		6948EE371B920CB800B5AC1A /* local_addons */ = {
 			isa = PBXGroup;
 			children = (
@@ -549,6 +559,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				0E2BF3F22278DC9200B78C9A /* mdFiles */,
 				0E2BF3E02278CC3B00B78C9A /* test */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
@@ -557,9 +568,6 @@
 				0E2BF3D82277A29D00B78C9A /* country_rot.txt */,
 				0E2BF3D5227799BB00B78C9A /* country.cpp */,
 				0E2BF3D6227799BB00B78C9A /* country.hpp */,
-				0E2BF3D92277AE7A00B78C9A /* PROPOSAL.md */,
-				0E2BF3DA2277AE8600B78C9A /* README.md */,
-				0E2BF3DB2277AEA800B78C9A /* DEVELOPMENT.md */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
