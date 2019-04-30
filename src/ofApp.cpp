@@ -44,8 +44,6 @@ void ofApp::setup(){
         }
     } else {
         std::cout << "You do not have the matching data files for countries.";
-        
-
     }
     
     
@@ -377,13 +375,16 @@ vector<vector<int>> ofApp::get_countryRot(string filePath) {
         vector<int> current_country_rot;
         
         vector<string> values_as_string = ofSplitString(line_of_text, ",");
-        for (unsigned int i = 0; i < values_as_string.size(); i++) {
-            int toAdd = string_to_int(values_as_string.at(i));
-            current_country_rot.push_back(toAdd);
-        }
-        
-        if (current_country_rot.size() == 3) {
-             toReturn.push_back(current_country_rot);
+        if (line_of_text.size() != 0) {
+            for (unsigned int i = 0; i < values_as_string.size(); i++) {
+                int toAdd = string_to_int(values_as_string.at(i));
+                current_country_rot.push_back(toAdd);
+            }
+            
+            if (current_country_rot.size() == 3) {
+                toReturn.push_back(current_country_rot);
+            }
+
         }
     }
     return toReturn;
