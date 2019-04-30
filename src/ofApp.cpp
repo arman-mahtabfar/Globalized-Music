@@ -25,6 +25,12 @@ void ofApp::setup(){
     //display the axis of the sphere
     displayAxis = true;
     
+    //display normal lines of sphere
+    drawNormals = false;
+    
+    //draw wire frame of sphere
+    drawWireFrame = false;
+    
     //These will change everytime we generate a random country.
     country_answer = "None";
     current_country = "None";
@@ -120,7 +126,14 @@ void ofApp::draw(){
     if (displayAxis) {
         sphere.drawAxes(sphere.getRadius() + 40);
     }
+    
+    if (drawNormals) {
+        sphere.drawNormals(sphere.getRadius() + 30);
+    }
     mTex.unbind();
+    if (drawWireFrame) {
+        sphere.drawWireframe();
+    }
     
     ofDisableDepthTest();
     ofFill();
@@ -137,6 +150,8 @@ void ofApp::draw(){
         key_box_string << "(r): Roll (Around blue axis)" << endl;
         key_box_string << "(p): Pan (Around green axis)" << endl;
         key_box_string << "(t): Tilt (Around red axis)" << endl;
+        key_box_string << "(f): Toggle Wire frame" << endl;
+        key_box_string << "(v): Toggle Normal lines" << endl;
         key_box_string << "(h): Toggle Key Display"<<endl;
         key_box_string << "Current Country: " << country_answer <<endl;
         ofDrawBitmapStringHighlight(key_box_string.str().c_str(), 20, 20);
@@ -260,6 +275,15 @@ void ofApp::keyPressed(int key){
         total_tilt = 0;
         total_roll = 0;
         total_pan = 0;
+    }
+    
+    
+    if (key == 'v') {
+        drawNormals = !drawNormals;
+    }
+    
+    if (key == 'f') {
+        drawWireFrame = !drawWireFrame;
     }
     
 }
