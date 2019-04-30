@@ -336,7 +336,7 @@ vector<Country> ofApp::get_country_names(string filePath) {
     stream.open(filePath);
     if (stream.fail()) {
         cerr << "Error opening the desired data file." << endl;
-        terminate();
+        return countries_in_file;
     }
     
     string line_of_text;
@@ -369,7 +369,7 @@ vector<vector<int>> ofApp::get_countryRot(string filePath) {
     stream.open(filePath);
     if (stream.fail()) {
         cerr << "Error opening the desired data file." << endl;
-        terminate();
+        return toReturn;
     }
     
     

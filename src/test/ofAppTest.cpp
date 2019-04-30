@@ -47,4 +47,53 @@ TEST_CASE("get random country") {
     REQUIRE(rand.roll_z == 80);
 }
 
+TEST_CASE("Get country names") {
+    vector<Country> countries = app.get_country_names("/Users/arman.mahtabfar/Desktop/of_v0.10.1_osx_release/apps/myApps/emptyExample/src/countries_name.txt");
+    
+    REQUIRE(countries.at(0).name == "Usa");
+    REQUIRE(countries.at(countries.size() - 1).name == "Australia");
+    REQUIRE(countries.at(4).name == "Nigeria");
+    REQUIRE(countries.at(3).name == "Ghana");
+    
+    
+    vector<Country> empty = app.get_country_names("Slfkjsal;dkfj");
+    
+    REQUIRE(empty.size() == 0);
+    
+    
+}
+
+TEST_CASE("Get country_rot") {
+    vector<vector<int>> country_rotations = app.get_countryRot("/Users/arman.mahtabfar/Desktop/of_v0.10.1_osx_release/apps/myApps/emptyExample/src/country_rot.txt");
+    
+    
+    int america_pan = country_rotations.at(0).at(0);
+    int america_roll = country_rotations.at(0).at(2);
+    
+    REQUIRE(america_pan == 280);
+    REQUIRE(america_roll == 320);
+    
+    int australia_pan = country_rotations.at(country_rotations.size() - 1).at(0);
+    int australia_tilt = country_rotations.at(country_rotations.size() - 1).at(1);
+    int australia_roll = country_rotations.at(country_rotations.size() - 1).at(2);
+    
+    REQUIRE(australia_pan == 40);
+    REQUIRE(australia_tilt == 325);
+    REQUIRE(australia_roll == 0);
+    
+    
+    int kenya_pan = country_rotations.at(5).at(0);
+    int kenya_tilt = country_rotations.at(5).at(1);
+    int kenya_roll = country_rotations.at(5).at(2);
+
+    REQUIRE(kenya_pan == 145);
+    REQUIRE(kenya_tilt == 0);
+    REQUIRE(kenya_roll == 0);
+
+    vector<vector<int>> empty = app.get_countryRot("lksdfjlsk;dj;");
+    REQUIRE(empty.size() == 0);
+    
+    
+}
+
 

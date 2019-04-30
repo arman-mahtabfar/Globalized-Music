@@ -119,3 +119,8 @@
 
 * Added a toggle axis display key for user functionality.
 
+## April 30th, 2019
+
+* Today I added a test folder with a catch file and a cpp file to test the ofApp helper functions.
+* I am going to focus on adding more counties and test cases.
+
