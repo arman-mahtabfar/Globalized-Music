@@ -23,6 +23,9 @@ void ofApp::setup(){
     //display the country on the globe
     displayCountry = false;
     
+    //display the axis of the sphere
+    displayAxis = true;
+    
     country_answer = "None";
     current_country = "None";
     
@@ -116,7 +119,9 @@ void ofApp::draw(){
     
     //draw the sphere
     sphere.draw();
-    sphere.drawAxes(sphere.getRadius() + 40);
+    if (displayAxis) {
+        sphere.drawAxes(sphere.getRadius() + 40);
+    }
     mTex.unbind();
     
     ofDisableDepthTest();
@@ -130,11 +135,12 @@ void ofApp::draw(){
         key_box_string << "(a): Reset" <<endl;
         key_box_string << "(s): Play random anthem"<<endl;
         key_box_string << "(d): Display Country" << endl;
-        key_box_string << "Current Country: " << country_answer <<endl;
+        key_box_string << "(z): Toggle Axis Display" <<endl;
         key_box_string << "(r): Roll (Around blue axis)" << endl;
         key_box_string << "(p): Pan (Around green axis)" << endl;
         key_box_string << "(t): Tilt (Around red axis)" << endl;
         key_box_string << "(h): Toggle Key Display"<<endl;
+        key_box_string << "Current Country: " << country_answer <<endl;
         ofDrawBitmapStringHighlight(key_box_string.str().c_str(), 20, 20);
     }
     
@@ -218,6 +224,10 @@ void ofApp::keyPressed(int key){
     
     if (key == 'h') {
         keyBox = !keyBox;
+    }
+    
+    if (key == 'z') {
+        displayAxis = !displayAxis;
     }
     
     

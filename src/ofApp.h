@@ -44,6 +44,8 @@ class ofApp : public ofBaseApp{
     //this will be true if we wish to rotate the sphere.
     bool rotate;
     
+    bool displayAxis;
+    
     bool displayCountry;
     
     //sound

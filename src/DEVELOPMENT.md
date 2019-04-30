@@ -117,4 +117,5 @@
 
 * Today I made a lot fo progress. I used the two text files to map the rotation to specific countries, by creating a vector of vector of ints for rotations ,and setting the rotations of each world as to the values of the vector inside the element of the first vector. Now, When I add more countries and rotation values, this will absolutely work. Tomorrow I am going to focus on testing.
 
+* Added a toggle axis display key for user functionality.
 
