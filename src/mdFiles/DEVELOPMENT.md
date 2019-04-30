@@ -129,8 +129,8 @@
 
 * Now I am going to add more countries.
 * In total I have more than 20 countries to choose from random.
-
 * Added more functionality with keys allowing user to draw wire frame and normal lines.
+* Implemented a last country variable that avoid playing the same song twice.
 
 
 

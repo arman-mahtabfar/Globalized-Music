@@ -99,6 +99,9 @@ class ofApp : public ofBaseApp{
     //all of the pan tilt and rotation values for each country as integers
     vector<vector<int>> country_rot;
     
+    //the last country whose song was played.
+    Country lastCountry;
+    
     
     //BELOW ARE VALUES USED SOLELY FOR DATA MINING
     int total_pan;

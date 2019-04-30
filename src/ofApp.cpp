@@ -36,6 +36,10 @@ void ofApp::setup(){
     current_country = "None";
     
     
+    //the last country that played does not exist so initialize its name to empty
+    lastCountry.name = " ";
+    
+    
     
     //Load the 2d image of the globe
     countries = get_country_names("/Users/arman.mahtabfar/Desktop/of_v0.10.1_osx_release/apps/myApps/emptyExample/src/countries_name.txt");
@@ -175,6 +179,9 @@ void ofApp::keyPressed(int key){
         //GENERATE random country/anthem
         
         Country rand_country = getRandom_country(countries);
+        
+        
+        lastCountry = rand_country;
         
         country_answer = "?????";
         
@@ -348,6 +355,10 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 //--------------------------------------------------------------
 Country ofApp::getRandom_country(vector<Country> countries) {
     unsigned int i = rand() % countries.size();
+    //make sure they are not the same.
+    if (countries.at(i).name == lastCountry.name) {
+        return getRandom_country(countries);
+    }
     return countries.at(i);
 }
 
