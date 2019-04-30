@@ -13,3 +13,9 @@ India
 Japan
 Iraq
 Australia
+Russia
+Germany
+France
+Italy
+Brazil
+Egypt
