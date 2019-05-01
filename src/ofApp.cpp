@@ -138,11 +138,11 @@ void ofApp::draw(){
     //draw the sphere
     sphere.draw();
     if (displayAxis) {
-        sphere.drawAxes(sphere.getRadius() + 50);
+        sphere.drawAxes(sphere.getRadius() + 70);
     }
     
     if (drawNormals) {
-        sphere.drawNormals(sphere.getRadius() + 20);
+        sphere.drawNormals(sphere.getRadius() + 5);
     }
     
     mTex.unbind();
@@ -162,7 +162,7 @@ void ofApp::draw(){
         key_box_string << "(1): Toggle spin" <<endl;
         key_box_string << "(2): Reset view" <<endl;
         key_box_string << "(3): Guess"<<endl;
-        key_box_string << "(4): Display Country" << endl;
+        key_box_string << "(RETURN): Display Country" << endl;
         key_box_string << "(5): Toggle Axis Display" <<endl;
         key_box_string << "(6): Roll (Around blue axis)" << endl;
         key_box_string << "(7): Pan (Around green axis)" << endl;
@@ -179,7 +179,7 @@ void ofApp::draw(){
         stringstream guessbox;
         guessbox << "Type the name of the country below: " <<endl << endl;
         guessbox << input_str << endl;
-        guessbox << "Press 4 to guess." << endl;
+        guessbox << "Press RETURN to enter guess." << endl;
         ofDrawBitmapStringHighlight(guessbox.str().c_str(), 20, 700);
 
     }
@@ -189,9 +189,9 @@ void ofApp::draw(){
         stringstream country_display;
 
         if (correct_answer) {
-            country_display << country_answer << " is CORRECT!";
+            country_display << "'" << country_answer <<"'" << " is CORRECT!";
         } else {
-            country_display << input_str << " is INCORRECT!";
+            country_display<< "'" << input_str <<"'" << " is INCORRECT!";
 
         }
         ofDrawBitmapStringHighlight(country_display.str().c_str(), 460, 378);
@@ -212,9 +212,15 @@ void ofApp::keyPressed(int key){
     
     //the user can type his response
     if (get_user_input == true) {
-        if (key == '4') {
+        if (key == OF_KEY_RETURN) {
             get_user_input = false;
         } else {
+            if (key == OF_KEY_BACKSPACE) {
+                if (input_str.size() > 0) {
+                    input_str.pop_back();
+                }
+                return;
+            }
             string add(1, (char)key);
             input_str.append(add);
             return;
@@ -286,7 +292,7 @@ void ofApp::keyPressed(int key){
     }
     
     
-    if (key == '4') {
+    if (key == OF_KEY_RETURN) {
         if (currently_playing_round) {
             currently_playing_round = false;
             
