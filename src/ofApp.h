@@ -112,8 +112,15 @@ class ofApp : public ofBaseApp{
     int total_tilt;
     int total_roll;
     
-    
+    //total times user guesses the country correctly
     int total_correct;
+    
+    //total times he guesses
     int total_played;
     
+    //based on if the user guessed the right country.
+    bool correct_answer;
+    
+    //currently playing round
+    bool currently_playing_round;
 };

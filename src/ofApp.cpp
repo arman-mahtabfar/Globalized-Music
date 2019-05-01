@@ -22,6 +22,9 @@ void ofApp::setup(){
     //get user input
     get_user_input = false;
     
+    //user has not guessed correctly yet
+    correct_answer = false;
+    
     //enable rotation of globe
     rotate = true;
     
@@ -179,8 +182,14 @@ void ofApp::draw(){
     
     if (displayCountry) {
         stringstream country_display;
-        country_display << country_answer;
-        ofDrawBitmapStringHighlight(country_display.str().c_str(), 498, 378);
+
+        if (correct_answer) {
+            country_display << country_answer << " is CORRECT!";
+        } else {
+            country_display << input_str << " is INCORRECT!";
+
+        }
+        ofDrawBitmapStringHighlight(country_display.str().c_str(), 460, 378);
     }
     
     stringstream score;
@@ -200,7 +209,6 @@ void ofApp::keyPressed(int key){
     if (get_user_input == true) {
         if (key == '4') {
             get_user_input = false;
-            std::cout << input_str << endl;
         } else {
             string add(1, (char)key);
             input_str.append(add);
@@ -212,6 +220,8 @@ void ofApp::keyPressed(int key){
     if (key == '3') {
         
         total_played++;
+        
+        currently_playing_round = true;
         
         //Allow for user input to guess country.
         get_user_input = true;
@@ -273,19 +283,22 @@ void ofApp::keyPressed(int key){
     
     
     if (key == '4') {
-        //REVEAL the name of the country
-        
-        country_answer = current_country;
-        
-        string lower_case_country = current_country;
-        lower_case_country.at(0) = (char)lower_case_country.at(0) + 32;
-        
-        if (lower_case_country == input_str) {
-            total_correct++;
-            std::cout << "CORRECT"<< endl;
+        if (currently_playing_round) {
+            currently_playing_round = false;
+            
+            //REVEAL the name of the country
+            country_answer = current_country;
+            
+            string lower_case_country = current_country;
+            lower_case_country.at(0) = (char)lower_case_country.at(0) + 32;
+            
+            if (lower_case_country == input_str) {
+                total_correct++;
+                correct_answer = true;
+            }
+            
+            displayCountry = true;
         }
-    
-        displayCountry = true;
     }
     
     if (key == 'h') {
@@ -316,7 +329,7 @@ void ofApp::keyPressed(int key){
 
     }
     
-    //Print rotate values
+    //Print rotate values, this is solely for me to manually input rotation data.
     if (key == 'b') {
         total_tilt = total_tilt % 360;
         total_pan = total_pan % 360;
@@ -326,6 +339,7 @@ void ofApp::keyPressed(int key){
         std::cout << "TILT: " << total_tilt << endl;
         std::cout << "ROLL:" << total_roll << endl;
     }
+    
     
     //Reset Rotation Values. Purely for finding data for the country rotation text file.
     if (key == 'l') {
