@@ -53,6 +53,7 @@ void ofApp::setup(){
     //Load the 2d image of the globe
     countries = get_country_names("/Users/arman.mahtabfar/Desktop/of_v0.10.1_osx_release/apps/myApps/emptyExample/src/countries_name.txt");
     
+    //load corresponding rotations of these countries
     country_rot = get_countryRot("/Users/arman.mahtabfar/Desktop/of_v0.10.1_osx_release/apps/myApps/emptyExample/src/country_rot.txt");
     
     
@@ -66,6 +67,7 @@ void ofApp::setup(){
         }
     } else {
         std::cout << "You do not have the matching data files for countries.";
+        OF_EXIT_APP(0);
     }
     
     
@@ -120,7 +122,6 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     
-    
     //Everytime I call draw I must also draw the image of the stars. but I first must do this by disabling the depth.
     ofPushStyle();
     glDisable(GL_DEPTH_TEST);
@@ -143,7 +144,9 @@ void ofApp::draw(){
     if (drawNormals) {
         sphere.drawNormals(sphere.getRadius() + 30);
     }
+    
     mTex.unbind();
+    
     if (drawWireFrame) {
         sphere.drawWireframe();
     }
@@ -152,6 +155,7 @@ void ofApp::draw(){
     ofFill();
     cam.end();
     
+    //for the UI for readers to know what is happening
     if(keyBox) {
         stringstream key_box_string;
         key_box_string << "Keys: " << endl << endl;
@@ -170,7 +174,7 @@ void ofApp::draw(){
         ofDrawBitmapStringHighlight(key_box_string.str().c_str(), 20, 20);
     }
     
-    
+    //lets them guess the correct country whose song is playing.
     if (get_user_input == true) {
         stringstream guessbox;
         guessbox << "Type the name of the country below: " <<endl << endl;
@@ -180,6 +184,7 @@ void ofApp::draw(){
 
     }
     
+    //if they are done guessing it should display either correct or incorrect at the center of the globe.
     if (displayCountry) {
         stringstream country_display;
 
@@ -192,6 +197,7 @@ void ofApp::draw(){
         ofDrawBitmapStringHighlight(country_display.str().c_str(), 460, 378);
     }
     
+    //Total score to be displayed at the top right.
     stringstream score;
     score << "Total Correct:" << total_correct << endl;
     score << "Total Played:" << total_played << endl;
@@ -203,9 +209,8 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    //the music will play in the background once s is pressed.
     
-    
+    //the user can type his response
     if (get_user_input == true) {
         if (key == '4') {
             get_user_input = false;
@@ -220,7 +225,7 @@ void ofApp::keyPressed(int key){
     if (key == '3') {
         
         total_played++;
-        
+    
         currently_playing_round = true;
         
         //Allow for user input to guess country.
@@ -249,11 +254,10 @@ void ofApp::keyPressed(int key){
         //Get the sphere to stop rotating, and shine a light on the desired path.
         rotate = false;
         
-        //Now I want the globe to point to a specific point (America)
-        
+        //reset position of globe
         sphere.setOrientation(ofQuaternion(0, ofVec3f(0,0,0)));
         
-        
+        //rotate to the current rand country
         sphere.panDeg(rand_country.pan_y);
         sphere.tiltDeg(rand_country.tilt_x);
         sphere.rollDeg(rand_country.roll_z);
@@ -382,7 +386,6 @@ void ofApp::mousePressed(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-    //sphere.setOrientation(ofQuaternion(0, ofVec3f(0,0,0)));
     
     //this will set the camera to its orignal spot, fixing the issue of location spot
     cam.reset();

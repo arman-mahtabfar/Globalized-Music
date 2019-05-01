@@ -140,3 +140,5 @@
 * Added more to ui so that it tells user if they are correct or not.
 
 * Avoided the user constantly pressing four to avoid cheating.
+
+* Cleaned up code and added more comments

@@ -30,6 +30,8 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+    
+        //get random country from vector of countries
         Country getRandom_country(vector<Country> countries);
     
         //parses a text file with the corresponding country names from the mp3 file
