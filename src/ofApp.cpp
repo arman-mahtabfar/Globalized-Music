@@ -138,11 +138,11 @@ void ofApp::draw(){
     //draw the sphere
     sphere.draw();
     if (displayAxis) {
-        sphere.drawAxes(sphere.getRadius() + 40);
+        sphere.drawAxes(sphere.getRadius() + 50);
     }
     
     if (drawNormals) {
-        sphere.drawNormals(sphere.getRadius() + 30);
+        sphere.drawNormals(sphere.getRadius() + 20);
     }
     
     mTex.unbind();
@@ -299,6 +299,8 @@ void ofApp::keyPressed(int key){
             if (lower_case_country == input_str) {
                 total_correct++;
                 correct_answer = true;
+            } else {
+                correct_answer = false;
             }
             
             displayCountry = true;

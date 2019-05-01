@@ -142,3 +142,5 @@
 * Avoided the user constantly pressing four to avoid cheating.
 
 * Cleaned up code and added more comments
+
+* Fixed bug that made user correct when in reality they were incorrect
