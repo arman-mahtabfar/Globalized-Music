@@ -102,10 +102,18 @@ class ofApp : public ofBaseApp{
     //the last country whose song was played.
     Country lastCountry;
     
+    string input_str;
+    
+    bool get_user_input;
+    
     
     //BELOW ARE VALUES USED SOLELY FOR DATA MINING
     int total_pan;
     int total_tilt;
     int total_roll;
+    
+    
+    int total_correct;
+    int total_played;
     
 };

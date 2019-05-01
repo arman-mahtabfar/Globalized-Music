@@ -133,4 +133,6 @@
 * Implemented a last country variable that avoid playing the same song twice.
 
 
-
+## May 1st, 2019
+* Today I added more functionality by letting the user guess what country the song is playing from, and then count their total score.
+* I also changed the key box by making the functions numbers instead of letters so that the user can type.

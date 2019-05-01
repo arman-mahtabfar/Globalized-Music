@@ -16,6 +16,12 @@ void ofApp::setup(){
     //enable the ability to draw the setbox.
     keyBox = true;
     
+    //the input string is empty
+    input_str = "";
+    
+    //get user input
+    get_user_input = false;
+    
     //enable rotation of globe
     rotate = true;
     
@@ -146,19 +152,29 @@ void ofApp::draw(){
     if(keyBox) {
         stringstream key_box_string;
         key_box_string << "Keys: " << endl << endl;
-        key_box_string << "(w): Toggle spin" <<endl;
-        key_box_string << "(a): Reset view" <<endl;
-        key_box_string << "(s): Play random anthem"<<endl;
-        key_box_string << "(d): Display Country" << endl;
-        key_box_string << "(z): Toggle Axis Display" <<endl;
-        key_box_string << "(r): Roll (Around blue axis)" << endl;
-        key_box_string << "(p): Pan (Around green axis)" << endl;
-        key_box_string << "(t): Tilt (Around red axis)" << endl;
-        key_box_string << "(f): Toggle Wire frame" << endl;
-        key_box_string << "(v): Toggle Normal lines" << endl;
+        key_box_string << "(1): Toggle spin" <<endl;
+        key_box_string << "(2): Reset view" <<endl;
+        key_box_string << "(3): Guess"<<endl;
+        key_box_string << "(4): Display Country" << endl;
+        key_box_string << "(5): Toggle Axis Display" <<endl;
+        key_box_string << "(6): Roll (Around blue axis)" << endl;
+        key_box_string << "(7): Pan (Around green axis)" << endl;
+        key_box_string << "(8): Tilt (Around red axis)" << endl;
+        key_box_string << "(9): Toggle Wire frame" << endl;
+        key_box_string << "(0): Toggle Normal lines" << endl;
         key_box_string << "(h): Toggle Key Display"<<endl;
         key_box_string << "Current Country: " << country_answer <<endl;
         ofDrawBitmapStringHighlight(key_box_string.str().c_str(), 20, 20);
+    }
+    
+    
+    if (get_user_input == true) {
+        stringstream guessbox;
+        guessbox << "Type the name of the country below: " <<endl << endl;
+        guessbox << input_str << endl;
+        guessbox << "Press 4 to guess." << endl;
+        ofDrawBitmapStringHighlight(guessbox.str().c_str(), 20, 700);
+
     }
     
     if (displayCountry) {
@@ -166,6 +182,12 @@ void ofApp::draw(){
         country_display << country_answer;
         ofDrawBitmapStringHighlight(country_display.str().c_str(), 498, 378);
     }
+    
+    stringstream score;
+    score << "Total Correct:" << total_correct << endl;
+    score << "Total Played:" << total_played << endl;
+    ofDrawBitmapStringHighlight(score.str().c_str(), 850, 20);
+
 
 
 }
@@ -173,8 +195,28 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     //the music will play in the background once s is pressed.
-    if (key == 's') {
+    
+    
+    if (get_user_input == true) {
+        if (key == '4') {
+            get_user_input = false;
+            std::cout << input_str << endl;
+        } else {
+            string add(1, (char)key);
+            input_str.append(add);
+            return;
+        }
+    }
+    
+    
+    if (key == '3') {
         
+        total_played++;
+        
+        //Allow for user input to guess country.
+        get_user_input = true;
+        
+        input_str = "";
         
         //GENERATE random country/anthem
         
@@ -182,6 +224,7 @@ void ofApp::keyPressed(int key){
         
         
         lastCountry = rand_country;
+        
         
         country_answer = "?????";
         
@@ -208,7 +251,7 @@ void ofApp::keyPressed(int key){
     }
     
     
-    if (key == 'a') {
+    if (key == '2') {
         //RESET (Continue spinning and stop music)
         
         sphere.setOrientation(ofQuaternion(0, ofVec3f(0,0,0)));
@@ -223,17 +266,25 @@ void ofApp::keyPressed(int key){
     }
     
     
-    if (key == 'w') {
+    if (key == '1') {
         //Toggle SPINNING GLOBE
         rotate = !rotate;
     }
     
     
-    if (key == 'd') {
+    if (key == '4') {
         //REVEAL the name of the country
         
         country_answer = current_country;
         
+        string lower_case_country = current_country;
+        lower_case_country.at(0) = (char)lower_case_country.at(0) + 32;
+        
+        if (lower_case_country == input_str) {
+            total_correct++;
+            std::cout << "CORRECT"<< endl;
+        }
+    
         displayCountry = true;
     }
     
@@ -241,25 +292,25 @@ void ofApp::keyPressed(int key){
         keyBox = !keyBox;
     }
     
-    if (key == 'z') {
+    if (key == '5') {
         displayAxis = !displayAxis;
     }
     
     
     //ROTATES AROUND GREEN AXIS
-    if (key == 'p') {
+    if (key == '7') {
         total_pan = total_pan + 5;
         sphere.panDeg(5);
     }
     
     //ROTATES AROUND BLUE AXIS
-    if (key == 'r') {
+    if (key == '6') {
         total_roll = total_roll + 5;
         sphere.rollDeg(5);
     }
     
     //ROTATES AROUND RED AXIS
-    if (key == 't') {
+    if (key == '8') {
         total_tilt = total_tilt + 5;
         sphere.tiltDeg(5);
 
@@ -285,11 +336,11 @@ void ofApp::keyPressed(int key){
     }
     
     
-    if (key == 'v') {
+    if (key == '0') {
         drawNormals = !drawNormals;
     }
     
-    if (key == 'f') {
+    if (key == '9') {
         drawWireFrame = !drawWireFrame;
     }
     

@@ -93,7 +93,5 @@ TEST_CASE("Get country_rot") {
     vector<vector<int>> empty = app.get_countryRot("lksdfjlsk;dj;");
     REQUIRE(empty.size() == 0);
     
-    
 }
-
 
